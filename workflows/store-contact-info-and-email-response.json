@@ -1,0 +1,176 @@
+{
+  "name": "Store Contact Info and email response",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Contact Us",
+        "formDescription": "Fill your details and we will get back at you soon",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Name",
+              "placeholder": "Enter your name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Message",
+              "fieldType": "textarea"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -288,
+        -96
+      ],
+      "id": "0f7d3e0a-3355-4dbc-b435-17de4905ed84",
+      "name": "On form submission",
+      "webhookId": "731048e7-d521-4e01-a7ee-14a26843433f"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "Thanks for contacting us",
+        "message": "=Hello {{ $json.Name }},  \nThank you for submitting the form.  We received your message: \"{{ $json.Message }}\"  Our team will contact you shortly.  Best regards, Support Team",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        192,
+        -96
+      ],
+      "id": "fa2e561c-2c4b-4ef9-adee-83a72ac760aa",
+      "name": "Send a message",
+      "webhookId": "2a41e653-f2a7-438b-9d64-6ab800f3b9a4"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1aAHccgoML8nsV6uFflmXc0T6bJNDzNcTJalRmqcMWlw",
+          "mode": "list",
+          "cachedResultName": "Contact Us",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1aAHccgoML8nsV6uFflmXc0T6bJNDzNcTJalRmqcMWlw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1aAHccgoML8nsV6uFflmXc0T6bJNDzNcTJalRmqcMWlw/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $json.Name }}",
+            "Email": "={{ $json.Email }}",
+            "Message": "={{ $json.Message }}",
+            "Updated At": "={{ $json.submittedAt }}"
+          },
+          "matchingColumns": [
+            "Email"
+          ],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Message",
+              "displayName": "Message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Updated At",
+              "displayName": "Updated At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -32,
+        -96
+      ],
+      "id": "75523a97-9a98-4c44-93b4-43f4b90f41ed",
+      "name": "Insert Contact Details"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Insert Contact Details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert Contact Details": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "5f9e9653-e7be-4b13-8f0c-2157e42e161d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "7800fa22fb2f3e35b3134b59be15bcc7952fda519c4937312ea32d275819bcf4"
+  },
+  "id": "IsuydRoQDhWKxQeN",
+  "tags": []
+}
