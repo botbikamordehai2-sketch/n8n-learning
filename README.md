@@ -3,7 +3,7 @@
 ריפו לימודים בלבד: n8n, Docker Desktop ב-Windows, ו-OAuth ל-Google Sheets / Gmail.
 
 **חשבון:** `botbikamordehai2-sketch` (משתמש אישי, לא ארגון).
-**סטטוס:** private.
+**סטטוס:** public.
 **ממשל:** מקורות-העל נשארים ב-[github-sync](https://github.com/botbikamordehai2-sketch/github-sync). הריפו הזה לא משנה GOVERNANCE / SAFETY_RULES / STATUS.
 
 ## מבנה
